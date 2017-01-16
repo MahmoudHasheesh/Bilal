@@ -14,10 +14,32 @@
 
 namespace Bilal
 {
+    using GalaSoft.MvvmLight;
     /// <summary>
     ///     Class MainPageViewModel.
     /// </summary>
-    internal class MainPageViewModel
+    public class MainPageViewModel : ViewModelBase
     {
+        private string mainText;
+
+        public string MainText
+        {
+            get
+            {
+                return this.mainText;
+            }
+            set
+            {
+                if (this.mainText == value) return;
+
+                this.mainText = value;
+                this.RaisePropertyChanged("MainText");
+            }
+        }
+
+        public MainPageViewModel()
+        {
+            this.MainText = "Hello Xamarin";
+        }
     }
 }
