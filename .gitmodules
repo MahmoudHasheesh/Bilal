@@ -1,0 +1,3 @@
+[submodule "prayer-times"]
+	path = prayer-times
+	url = https://github.com/stankovski/prayer-times
