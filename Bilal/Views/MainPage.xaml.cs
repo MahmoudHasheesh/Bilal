@@ -1,5 +1,5 @@
 ﻿// ***********************************************************************
-// Assembly         : Bilal.UWP
+// Assembly         : Bilal
 // Author           : Mahmoud Hasheesh
 // Created          : 01-16-2017
 //
@@ -12,15 +12,15 @@
 // <summary></summary>
 // ***********************************************************************
 
-namespace Bilal.UWP
+namespace Bilal
 {
+    using Xamarin.Forms;
+
     /// <summary>
-    ///     Class MainPage. This class cannot be inherited.
+    ///     Class MainPage.
     /// </summary>
-    /// <seealso cref="Xamarin.Forms.Platform.UWP.WindowsPage" />
-    /// <seealso cref="Windows.UI.Xaml.Markup.IComponentConnector" />
-    /// <seealso cref="Windows.UI.Xaml.Markup.IComponentConnector2" />
-    public sealed partial class MainPage
+    /// <seealso cref="Xamarin.Forms.ContentPage" />
+    public partial class MainPage : ContentPage
     {
         /// <summary>
         ///     Initializes a new instance of the <see cref="MainPage" /> class.
@@ -28,8 +28,6 @@ namespace Bilal.UWP
         public MainPage()
         {
             this.InitializeComponent();
-
-            this.LoadApplication(new Bilal.App());
         }
     }
 }
