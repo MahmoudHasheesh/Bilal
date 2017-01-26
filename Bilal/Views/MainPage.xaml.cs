@@ -14,13 +14,11 @@
 
 namespace Bilal
 {
-    using Xamarin.Forms;
-
     /// <summary>
     ///     Class MainPage.
     /// </summary>
     /// <seealso cref="Xamarin.Forms.ContentPage" />
-    public partial class MainPage : ContentPage
+    public partial class MainPage
     {
         /// <summary>
         ///     Initializes a new instance of the <see cref="MainPage" /> class.

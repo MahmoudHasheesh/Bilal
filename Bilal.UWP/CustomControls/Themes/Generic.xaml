@@ -1,0 +1,157 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Bilal.UWP">
+    <Style TargetType="local:CompassControl">
+        <Setter Property="Width" Value="200" />
+        <Setter Property="Height" Value="200" />
+        <Setter Property="Heading" Value="45.00" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="local:CompassControl">
+                    <Viewbox Width="{TemplateBinding Width}" Height="{TemplateBinding Height}">
+                        <Grid Width="200" Height="200">
+                            <Ellipse Fill="Black" StrokeThickness="6">
+                                <!--<Ellipse.Stroke>
+                                    <RadialGradientBrush>
+                                        <GradientStop Offset="0.97" Color="Black" />
+                                        <GradientStop Offset="1" Color="#FFA3A3A3" />
+                                    </RadialGradientBrush>
+                                </Ellipse.Stroke>-->
+                                <Ellipse.Stroke>
+                                    <LinearGradientBrush>
+                                        <GradientStop Offset="0.97" Color="Black" />
+                                        <GradientStop Offset="1" Color="#FFA3A3A3" />
+                                    </LinearGradientBrush>
+                                </Ellipse.Stroke>
+                            </Ellipse>
+                            <Path
+                                Margin="25.25"
+                                Data="M74.75,0.5 L78.833755,70.666245 L149,74.75 L78.833755,78.833755 L74.75,149 L70.666245,78.833755 L0.5,74.75 L70.666245,70.666245 z M109.57501,39.924999 L78.58075,74.750008 L109.57501,109.57502 L74.75,78.580757 L39.924992,109.57502 L70.91925,74.750008 L39.924992,39.924999 L74.75,70.919258 z"
+                                Stretch="Fill"
+                                UseLayoutRounding="False">
+                                <!--<Path.Fill>
+                                    <RadialGradientBrush>
+                                        <GradientStop Color="Black" />
+                                        <GradientStop Offset="0.377" Color="#FFA3A3A3" />
+                                    </RadialGradientBrush>
+                                </Path.Fill>
+                                <Path.Stroke>
+                                    <RadialGradientBrush>
+                                        <GradientStop Color="Black" />
+                                        <GradientStop Offset="1" Color="#FFA3A3A3" />
+                                    </RadialGradientBrush>
+                                </Path.Stroke>-->
+                                <Path.Fill>
+                                    <LinearGradientBrush>
+                                        <GradientStop Color="Black" />
+                                        <GradientStop Offset="0.377" Color="#FFA3A3A3" />
+                                    </LinearGradientBrush>
+                                </Path.Fill>
+                                <Path.Stroke>
+                                    <LinearGradientBrush>
+                                        <GradientStop Color="Black" />
+                                        <GradientStop Offset="1" Color="#FFA3A3A3" />
+                                    </LinearGradientBrush>
+                                </Path.Stroke>
+                            </Path>
+                            <Border
+                                Margin="93,0"
+                                Padding="0,66"
+                                RenderTransformOrigin="0.5,0.5"
+                                UseLayoutRounding="False">
+                                <Border.RenderTransform>
+                                    <!--  I don't know why I can't dot Angle="{TemplateBinding Heading}"  -->
+                                    <RotateTransform Angle="{Binding Heading, RelativeSource={RelativeSource TemplatedParent}}" />
+                                </Border.RenderTransform>
+                                <Grid RenderTransformOrigin="0.5,0.5">
+                                    <Path
+                                        Data="M7,0 L14,68 L-5.5850755E-09,68 z"
+                                        RenderTransformOrigin="0.500000000199467,0.5"
+                                        Stretch="Fill"
+                                        Stroke="#FFA3A3A3"
+                                        StrokeThickness="0"
+                                        UseLayoutRounding="False">
+                                        <Path.Fill>
+                                            <LinearGradientBrush StartPoint="-1.098,0.575" EndPoint="3.227,0.572">
+                                                <GradientStop Offset="0.138" Color="Black" />
+                                                <GradientStop Offset="0.535" Color="Red" />
+                                            </LinearGradientBrush>
+                                        </Path.Fill>
+                                        <Path.RenderTransform>
+                                            <CompositeTransform TranslateY="-34" />
+                                        </Path.RenderTransform>
+                                    </Path>
+                                    <Path
+                                        Data="M7,0 L14,68 L-5.5850755E-09,68 z"
+                                        RenderTransformOrigin="0.500000000199467,0.5"
+                                        Stretch="Fill"
+                                        Stroke="#FFA3A3A3"
+                                        StrokeThickness="0"
+                                        UseLayoutRounding="False">
+                                        <Path.Fill>
+                                            <LinearGradientBrush StartPoint="2.227,0.713" EndPoint="-1.985,0.749">
+                                                <GradientStop Offset="0" Color="Black" />
+                                                <GradientStop Offset="0.475" Color="White" />
+                                            </LinearGradientBrush>
+                                        </Path.Fill>
+                                        <Path.RenderTransform>
+                                            <CompositeTransform Rotation="180" TranslateY="34" />
+                                        </Path.RenderTransform>
+                                    </Path>
+                                </Grid>
+                            </Border>
+
+                            <Ellipse Margin="93" Stroke="#FFA3A3A3">
+                                <!--<Ellipse.Fill>
+                                    <RadialGradientBrush>
+                                        <GradientStop Offset="1" Color="#FFA3A3A3" />
+                                        <GradientStop Offset="0.377" Color="White" />
+                                    </RadialGradientBrush>
+                                </Ellipse.Fill>-->
+                                <Ellipse.Fill>
+                                    <LinearGradientBrush>
+                                        <GradientStop Offset="1" Color="#FFA3A3A3" />
+                                        <GradientStop Offset="0.377" Color="White" />
+                                    </LinearGradientBrush>
+                                </Ellipse.Fill>
+                            </Ellipse>
+                            <TextBlock
+                                Margin="0"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Top"
+                                FontSize="20"
+                                Foreground="White"
+                                Text="N"
+                                TextWrapping="Wrap" />
+                            <TextBlock
+                                Margin="0,0,3,2"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                FontSize="18.667"
+                                Foreground="White"
+                                Text="E"
+                                TextWrapping="Wrap" />
+                            <TextBlock
+                                Margin="4,0,0,2"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                FontSize="18.667"
+                                Foreground="White"
+                                Text="W"
+                                TextWrapping="Wrap" />
+                            <TextBlock
+                                Margin="0"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Bottom"
+                                FontSize="18.667"
+                                Foreground="White"
+                                Text="S"
+                                TextWrapping="Wrap" />
+                        </Grid>
+                    </Viewbox>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

@@ -1,14 +1,21 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 
-<ContentPage x:Class="Bilal.MainPage"
-             xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:bilal="clr-namespace:Bilal;assembly=Bilal"
-             Title="Bilal">
-    <ContentPage.BindingContext>
+<MasterDetailPage
+    x:Class="Bilal.MainPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:bilal="clr-namespace:Bilal;assembly=Bilal">
+    <MasterDetailPage.BindingContext>
         <bilal:MainPageViewModel />
-    </ContentPage.BindingContext>
-    <Label HorizontalOptions="Center"
-           Text="{Binding MainText}"
-           VerticalOptions="Center" />
-</ContentPage>
+    </MasterDetailPage.BindingContext>
+    <MasterDetailPage.Master>
+        <ContentPage Title="Qibla">
+            <bilal:QiblaView />
+        </ContentPage>
+    </MasterDetailPage.Master>
+    <MasterDetailPage.Detail>
+        <ContentPage Title="Prayer Times">
+            <bilal:PrayerTimesView />
+        </ContentPage>
+    </MasterDetailPage.Detail>
+</MasterDetailPage>

@@ -29,7 +29,7 @@ namespace Bilal
         {
             // The root page of your application
             var content = new MainPage();
-            this.MainPage = new NavigationPage(content);
+            this.MainPage = content;
         }
 
         /// <summary>
