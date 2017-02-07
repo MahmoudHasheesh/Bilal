@@ -1,0 +1,122 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace WpfApplication1.Coversion
+{
+    public class DMath
+    {
+         public static double dtr(double d) { return (d * Math.PI) / 180.0; }
+	     public static double rtd(double r) { return (r * 180.0) / Math.PI; }
+
+	     public static double sin(double d) { return Math.Sin(DMath.dtr(d)); }
+	     public static double cos(double d) { return Math.Cos(DMath.dtr(d)); }
+	     public static double tan(double d) { return Math.Tan(DMath.dtr(d)); }
+
+	     public static double arcsin(double d) { return DMath.rtd(Math.Asin(d)); }
+	     public static double arccos(double d) { return DMath.rtd(Math.Acos(d)); }
+	     public static double arctan(double d) { return DMath.rtd(Math.Atan(d)); }
+
+	     public static double arccot(double x) { return DMath.rtd(Math.Atan(1 / x)); }
+	     public static double arctan2(double y, double x) { return DMath.rtd(Math.Atan2(y, x)); }
+
+	     public static double fixAngle(double a) { return DMath.fix(a, 360); }
+	     public static double fixHour(double a) { return DMath.fix(a, 24); }
+
+	     public static double fix(double a, double b)
+         {
+             a = a - b * (Math.Floor(a / b));
+             return (a < 0) ? a + b : a;
+         }
+    }
+
+    public class Method
+    {
+        public string name { get; set; }
+
+        public Dictionary<TimeName, object> _params { get; set; }
+    }
+
+    public enum TimeName
+    {
+        Imsak,
+        Fajr,
+        Sunrise,
+        Dhuhr,
+        Asr,
+        Sunset,
+        Maghrib,
+        Isha,
+        Midnight,
+        HighLats
+    }
+
+    public enum MethodName
+    {
+        MWL,
+        ISNA,
+        Egypt,
+        Makkah,
+        Karachi,
+        Tehran,
+        Jafari
+    }
+    public enum AsrMethod
+    {
+        Standard,
+        Hanafi
+    }
+
+    public struct GeoCoordinate : IEquatable<GeoCoordinate>
+    {
+        private readonly double latitude;
+        private readonly double longitude;
+        private readonly double? elevation;
+
+        public double Latitude { get { return latitude; } }
+        public double Longitude { get { return longitude; } }
+        public double? Elevation { get { return longitude; } }
+
+        public GeoCoordinate(double latitude, double longitude, double? elevation = null)
+        {
+            this.latitude = latitude;
+            this.longitude = longitude;
+            this.elevation = elevation;
+        }
+
+        public override string ToString()
+        {
+            return string.Format("{0},{1},{2}", Latitude, Longitude, Elevation);
+        }
+
+        public override bool Equals(Object other)
+        {
+            return other is GeoCoordinate && Equals((GeoCoordinate)other);
+        }
+
+        public bool Equals(GeoCoordinate other)
+        {
+            return Latitude == other.Latitude && Longitude == other.Longitude && Elevation == other.Elevation;
+        }
+
+        public override int GetHashCode()
+        {
+            return Latitude.GetHashCode() ^ Longitude.GetHashCode();
+        }
+    }
+
+    public struct SunPosition
+    {
+        public double declination { get; set; }
+
+        public double equation { get; set; }
+
+        public SunPosition(double declination, double equation)
+        {
+            this.declination = declination;
+            this.equation = equation;
+        }
+    }
+}
