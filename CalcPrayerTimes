@@ -1,0 +1,129 @@
+// Copyright © 2017 ACS Corporation. All rights reserved.
+using System;
+
+namespace PrayerTimes
+{
+    public class CalcPrayerTimes
+    {
+        private readonly double asrTime;
+
+        private readonly double eshaTime;
+
+        private readonly double fajrTime;
+
+        private readonly double localNoon;
+
+        private readonly double sunRise;
+
+        private readonly double sunSet;
+
+        public CalcPrayerTimes(int year, int month, int day, double Long, double lat, double zone)
+        {
+            var d = 367 * year - (year + (month + 9) / 12) * 7 / 4 + (275 * month / 9 + day - 730531.5);
+            var l = (280.461 + 0.9856474 * d) % 360;
+            l = this.LessMore360(l);
+            var m = (357.528 + 0.9856003 * d) % 360;
+            m = this.LessMore360(m);
+            var lambda = l + 1.915 * Math.Sin(this.ToRadian(m)) + 0.02 * Math.Sin(this.ToRadian(2 * m));
+            lambda = this.LessMore360(lambda);
+            var obliquity = 23.439 - 0.0000004 * d;
+            var alpha = this.ToDegree(Math.Atan(Math.Cos(this.ToRadian(obliquity)) * Math.Tan(this.ToRadian(lambda))));
+            alpha = this.LessMore360(alpha);
+            alpha = alpha - 360 * (int)(alpha / 360);
+            alpha = alpha + 90 * (Math.Floor(lambda / 90) - Math.Floor(alpha / 90));
+            var st = (100.46 + 0.985647352 * d) % 360;
+            var dec = this.ToDegree(Math.Asin(Math.Sin(this.ToRadian(obliquity)) * Math.Sin(this.ToRadian(lambda))));
+            var durinalArc = this.ToDegree(Math.Acos((Math.Sin(this.ToRadian(-0.8333)) - Math.Sin(this.ToRadian(dec)) * Math.Sin(this.ToRadian(lat))) / (Math.Cos(this.ToRadian(dec)) * Math.Cos(this.ToRadian(lat)))));
+            var noon = alpha - st;
+            noon = this.LessMore360(noon);
+            var utNoon = noon - Long;
+            this.localNoon = utNoon / 15 + zone;
+            var asrAlt = this.ToDegree(Math.Atan(1 + Math.Tan(this.ToRadian(lat - dec))));
+            var asrArc = this.ToDegree(Math.Acos((Math.Sin(this.ToRadian(90 - asrAlt)) - Math.Sin(this.ToRadian(dec)) * Math.Sin(this.ToRadian(lat))) / (Math.Cos(this.ToRadian(dec)) * Math.Cos(this.ToRadian(lat)))));
+            asrArc = asrArc / 15;
+            this.asrTime = this.localNoon + asrArc;
+            this.sunRise = this.localNoon - durinalArc / 15;
+            this.sunSet = this.localNoon + durinalArc / 15;
+            var eshaArc = this.ToDegree(Math.Acos((Math.Sin(this.ToRadian(-18)) - Math.Sin(this.ToRadian(dec)) * Math.Sin(this.ToRadian(lat))) / (Math.Cos(this.ToRadian(dec)) * Math.Cos(this.ToRadian(lat)))));
+            this.eshaTime = this.localNoon + eshaArc / 15;
+            var fajrArc = this.ToDegree(Math.Acos((Math.Sin(this.ToRadian(-18)) - Math.Sin(this.ToRadian(dec)) * Math.Sin(this.ToRadian(lat))) / (Math.Cos(this.ToRadian(dec)) * Math.Cos(this.ToRadian(lat)))));
+            this.fajrTime = this.localNoon - fajrArc / 15;
+        }
+
+        public int LocalNoonHour
+        {
+            get { return (int)this.localNoon; }
+        }
+
+        public int LocalNoonMin
+        {
+            get { return (int)((this.localNoon - (int)this.localNoon) * 60); }
+        }
+
+        public int AsrHour
+        {
+            get { return (int)this.asrTime; }
+        }
+
+        public int AsrMin
+        {
+            get { return (int)((this.asrTime - (int)this.asrTime) * 60); }
+        }
+
+        public int SunRiseHour
+        {
+            get { return (int)this.sunRise; }
+        }
+
+        public int SunRiseMinr
+        {
+            get { return (int)((this.sunRise - (int)this.sunRise) * 60); }
+        }
+
+        public int SunSetHour
+        {
+            get { return (int)this.sunSet; }
+        }
+
+        public int SunSetMin
+        {
+            get { return (int)((this.sunSet - (int)this.sunSet) * 60); }
+        }
+
+        public int FajrHour
+        {
+            get { return (int)this.fajrTime; }
+        }
+
+        public int FajrMin
+        {
+            get { return (int)((this.fajrTime - (int)this.fajrTime) * 60); }
+        }
+
+        public int EshaHour
+        {
+            get { return (int)this.eshaTime; }
+        }
+
+        public int EshaMin
+        {
+            get { return (int)((this.eshaTime - (int)this.eshaTime) * 60); }
+        }
+
+        public double ToRadian(double value)
+        {
+            return value * Math.PI / 180;
+        }
+
+        public double ToDegree(double value)
+        {
+            return value * 180 / Math.PI;
+        }
+
+        public double LessMore360(double value)
+        {
+            if (value <= 0 || value > 360) { return value + 360; }
+            return value;
+        }
+    }
+}
