@@ -38,6 +38,7 @@
     <Compile Include="App.cs" />
     <Compile Include="Helpers\ImageResourceExtension.cs" />
     <Compile Include="PrayTimes.cs" />
+    <Compile Include="ViewModels\GeoHelper.cs" />
     <Compile Include="ViewModels\PrayerTimesViewModel.cs" />
     <Compile Include="ViewModels\QiblaViewModel.cs" />
     <Compile Include="ViewModels\MainPageViewModel.cs" />
@@ -126,6 +127,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="PrayTimes.js" />
+    <Content Include="Resources\compass.svg" />
+    <EmbeddedResource Include="Resources\arrow.png" />
     <EmbeddedResource Include="Resources\digital-compass.png" />
   </ItemGroup>
   <ItemGroup>

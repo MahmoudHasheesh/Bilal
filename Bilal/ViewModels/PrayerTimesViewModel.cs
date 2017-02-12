@@ -32,6 +32,8 @@ namespace Bilal
     /// </summary>
     public class PrayerTimesViewModel : ViewModelBase
     {
+        readonly IGeolocator locator;
+
         private string asr;
 
         private string date;
@@ -39,6 +41,8 @@ namespace Bilal
         private string dhuhr;
 
         private string fajr;
+
+        private double heading;
 
         private string isha;
 
@@ -52,6 +56,10 @@ namespace Bilal
         {
             this.RefreshCommand = new RelayCommand(this.OnRefreshExecuted);
             this.RefreshCommand.Execute(null);
+
+            this.locator = CrossGeolocator.Current;
+            this.locator.DesiredAccuracy = 50;
+            this.locator.PositionChanged += this.LocatorOnPositionChanged;
         }
 
         public string Isha
@@ -174,8 +182,6 @@ namespace Bilal
             }
         }
 
-        private double heading;
-
         public double Heading
         {
             get
@@ -227,12 +233,8 @@ namespace Bilal
         {
             try
             {
-                var locator = CrossGeolocator.Current;
-                locator.DesiredAccuracy = 50;
-                locator.PositionChanged -= this.LocatorOnPositionChanged;
-                locator.PositionChanged += this.LocatorOnPositionChanged;
                 //await locator.StartListeningAsync(5000, 10);
-                var position = await locator.GetPositionAsync(-1, CancellationToken.None, true);
+                var position = await this.locator.GetPositionAsync();
                 return position;
             }
             catch (Exception ex)

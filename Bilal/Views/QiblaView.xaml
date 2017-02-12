@@ -4,11 +4,24 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:bilal="clr-namespace:Bilal;assembly=Bilal"
+    xmlns:controls="clr-namespace:NControl.Controls;assembly=NControl.Controls"
     xmlns:helpers="clr-namespace:Bilal.Helpers;assembly=Bilal">
     <ContentView.BindingContext>
         <bilal:QiblaViewModel />
     </ContentView.BindingContext>
-    <Grid>
+    <Grid
+        AnchorX="0.5"
+        AnchorY="0.5"
+        Rotation="{Binding Rotation}">
+        <Image
+            Aspect="AspectFit"
+            HeightRequest="200"
+            HorizontalOptions="Center"
+            MinimumHeightRequest="150"
+            MinimumWidthRequest="150"
+            Source="{helpers:ImageResource Bilal.Resources.digital-compass.png}"
+            VerticalOptions="Center"
+            WidthRequest="200" />
         <Image
             AnchorX="0.5"
             AnchorY="0.5"
@@ -17,8 +30,8 @@
             HorizontalOptions="Center"
             MinimumHeightRequest="150"
             MinimumWidthRequest="150"
-            Rotation="{Binding Rotation}"
-            Source="{helpers:ImageResource Bilal.Resources.digital-compass.png}"
+            Rotation="{Binding Bearing}"
+            Source="{helpers:ImageResource Bilal.Resources.arrow.png}"
             VerticalOptions="Center"
             WidthRequest="200" />
     </Grid>
